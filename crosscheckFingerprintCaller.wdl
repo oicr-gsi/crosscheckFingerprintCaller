@@ -49,6 +49,10 @@ workflow crosscheckFingerprintCaller {
             {
                 name: "crosscheck_fingerprint_caller",
                 url: "https://github.com/oicr-gsi/crosscheck_fingerprint_caller"
+            },
+            {
+                name: "jq",
+                url: "https://jqlang.github.io/jq/"
             }
         ]
         output_meta: {
@@ -61,6 +65,10 @@ workflow crosscheckFingerprintCaller {
 task writeAmbiguousRange {
     input {
         Array[Map[String, String]] ambiguous
+        Int timeout = 1
+        Int memory = 1
+        Int threads = 1
+        String modules = "jq/1.6"
     }
 
     File input_ambiguous = write_json(ambiguous)
@@ -73,11 +81,36 @@ task writeAmbiguousRange {
     output {
         File out = "ambiguous.json"
     }
+
+    parameter_meta {
+        ambiguous: "The ambiguous LOD ranges for each library design pair"
+        timeout: "The hours until the task is killed."
+        memory: "The GB of memory provided to the task."
+        threads: "The number of threads the task has access to."
+        modules: "The modules that will be loaded."
+    }
+
+    meta {
+        out_metadata: {
+            out: "A file that's storing the ambiguous JSON string"
+        }
+    }
+
+    runtime {
+        modules: "~{modules}"
+        memory:  "~{memory} GB"
+        cpu:     "~{threads}"
+        timeout: "~{timeout}"
+    }
 }
 
 task writeMetadata {
     input {
         Array[Map[String, String]] metadata
+        Int timeout = 1
+        Int memory = 1
+        Int threads = 1
+        String modules = ""
     }
 
     File out_metadata = write_json(metadata)
@@ -90,6 +123,27 @@ task writeMetadata {
     output {
         File out = "metadata.json"
     }
+
+    parameter_meta {
+        metadata: "Metadata to add to the CrosscheckFingerprints data"
+        timeout: "The hours until the task is killed."
+        memory: "The GB of memory provided to the task."
+        threads: "The number of threads the task has access to."
+        modules: "The modules that will be loaded."
+    }
+
+    meta {
+        out_metadata: {
+            out: "A file that's storing the metadata JSON string"
+        }
+    }
+
+    runtime {
+        modules: "~{modules}"
+        memory:  "~{memory} GB"
+        cpu:     "~{threads}"
+        timeout: "~{timeout}"
+    }
 }
 
 task runMain {
@@ -99,6 +153,10 @@ task runMain {
         File ambiguous
         String seperator
         String outputFileNamePrefix
+        Int timeout = 1
+        Int memory = 1
+        Int threads = 1
+        String modules = "crosscheck-fingerprint-caller/0.2.0"
     }
 
     command <<<
@@ -116,5 +174,31 @@ task runMain {
     output {
         File calls = "~{outputFileNamePrefix}.calls.csv"
         File detailed = "~{outputFileNamePrefix}.detailed.csv"
+    }
+
+    parameter_meta {
+        crosscheckFingerprints: "CrosscheckFingerprints input files"
+        metadata: "Metadata to add to the CrosscheckFingerprints data"
+        ambiguous: "The ambiguous LOD ranges for each library design pair"
+        seperator: "Which character is used to seperate multiple batches"
+        outputFileNamePrefix: "String to add to the output file names"
+        timeout: "The hours until the task is killed."
+        memory: "The GB of memory provided to the task."
+        threads: "The number of threads the task has access to."
+        modules: "The modules that will be loaded."
+    }
+
+    meta {
+        out_metadata: {
+            calls: "CSV file with metadata and swap calls for each library",
+            detailed: "CSV file with metadata and detailed swap calls for each library pair"
+        }
+    }
+
+    runtime {
+        modules: "~{modules}"
+        memory:  "~{memory} GB"
+        cpu:     "~{threads}"
+        timeout: "~{timeout}"
     }
 }
