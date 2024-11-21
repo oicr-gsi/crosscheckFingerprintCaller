@@ -71,6 +71,7 @@ task writeAmbiguousRange {
         String modules = "jq/1.6"
     }
 
+    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
     Object dummy = object {dummy: ambiguous}
     File input_ambiguous = write_json(dummy)
 
@@ -114,6 +115,7 @@ task writeMetadata {
         String modules = "jq/1.6"
     }
 
+    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
     Object dummy = object {dummy: metadata}
     File out_metadata = write_json(dummy)
 
