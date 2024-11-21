@@ -56,8 +56,14 @@ workflow crosscheckFingerprintCaller {
             }
         ]
         output_meta: {
-            calls: "CSV file with metadata and swap calls for each library",
-            detailed: "CSV file with metadata and detailed swap calls for each library pair"
+            calls: {
+                description: "CSV file with metadata and swap calls for each library",
+                vidarr_label: "calls"
+            },
+            detailed: {
+                description: "CSV file with metadata and detailed swap calls for each library pair",
+                vidarr_label: "detailed"
+            }
         }
     }
 }
