@@ -71,11 +71,12 @@ task writeAmbiguousRange {
         String modules = "jq/1.6"
     }
 
-    File input_ambiguous = write_json(ambiguous)
+    Object dummy = object {dummy: ambiguous}
+    File input_ambiguous = write_json(dummy)
 
     command <<<
         set -euo pipefail
-        jq '[.[] | {pair: [.first_pair, .second_pair], upper: (.upper | tonumber), lower: (.lower | tonumber)}]' ~{input_ambiguous} > "ambiguous.json"
+        jq '[.dummy[] | {pair: [.first_pair, .second_pair], upper: (.upper | tonumber), lower: (.lower | tonumber)}]' ~{input_ambiguous} > "ambiguous.json"
     >>>
 
     output {
@@ -110,14 +111,15 @@ task writeMetadata {
         Int timeout = 1
         Int memory = 1
         Int threads = 1
-        String modules = ""
+        String modules = "jq/1.6"
     }
 
-    File out_metadata = write_json(metadata)
+    Object dummy = object {dummy: metadata}
+    File out_metadata = write_json(dummy)
 
     command <<<
         set -euo pipefail
-        cat ~{out_metadata} > metadata.json
+        jq '.dummy' ~{out_metadata} > metadata.json
     >>>
 
     output {
@@ -161,7 +163,6 @@ task runMain {
 
     command <<<
         set -euo pipefail
-        source activate cfc
         crosscheck-fingerprint-caller \
             --ambiguous-lod ~{ambiguous} \
             --seperator '~{seperator}' \
