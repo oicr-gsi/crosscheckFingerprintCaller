@@ -67,7 +67,7 @@
 					"lower": "-150"
 				}
 			],
-			"crosscheckFingerprintCaller.crosscheckFingerprints": {
+			"crosscheckFingerprintCaller.crosscheckFingerprints": [{
 				"contents": {
 					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data/OCTMOH4.39851.crosscheck_metrics.txt",
 					"externalIds": [
@@ -78,7 +78,7 @@
 					]
 				},
 				"type": "EXTERNAL"
-			},
+			}],
 			"crosscheckFingerprintCaller.metadata": [
 				{
 					"run": "240405_M06816_0073_000000000-DNV22",
