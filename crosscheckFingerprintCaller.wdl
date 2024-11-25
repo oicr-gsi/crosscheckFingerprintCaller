@@ -78,8 +78,7 @@ task writeAmbiguousRange {
     }
 
     # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
-    Object dummy = object {dummy: ambiguous}
-    File input_ambiguous = write_json(dummy)
+    File input_ambiguous = write_json(object {dummy: ambiguous})
 
     command <<<
         set -euo pipefail
@@ -122,8 +121,7 @@ task writeMetadata {
     }
 
     # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
-    Object dummy = object {dummy: metadata}
-    File out_metadata = write_json(dummy)
+    File out_metadata = write_json(object {dummy: metadata})
 
     command <<<
         set -euo pipefail
