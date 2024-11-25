@@ -17,22 +17,14 @@ workflow crosscheckFingerprintCaller {
         outputFileNamePrefix: "String to add to the output file names"
     }
 
-    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
-    Object ambiguous_dummy = object {dummy: ambiguous}
-    File ambiguous_file = write_json(ambiguous_dummy)
-
     call writeAmbiguousRange {
         input:
-            ambiguous_file = ambiguous_file
+            ambiguous = ambiguous
     }
-
-    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
-    Object metadata_dummy = object {dummy: metadata}
-    File metadata_file = write_json(metadata_dummy)
 
     call writeMetadata {
         input:
-            metadata_file = metadata_file
+            metadata = metadata
     }
 
     call runMain {
@@ -78,16 +70,20 @@ workflow crosscheckFingerprintCaller {
 
 task writeAmbiguousRange {
     input {
-        File ambiguous_file
+        Array[Map[String, String]] ambiguous
         Int timeout = 1
         Int memory = 1
         Int threads = 1
         String modules = "jq/1.6"
     }
 
+    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
+    Object dummy = object {dummy: ambiguous}
+    File input_ambiguous = write_json(dummy)
+
     command <<<
         set -euo pipefail
-        jq '[.dummy[] | {pair: [.first_pair, .second_pair], upper: (.upper | tonumber), lower: (.lower | tonumber)}]' ~{ambiguous_file} > "ambiguous.json"
+        jq '[.dummy[] | {pair: [.first_pair, .second_pair], upper: (.upper | tonumber), lower: (.lower | tonumber)}]' ~{input_ambiguous} > "ambiguous.json"
     >>>
 
     output {
@@ -95,7 +91,7 @@ task writeAmbiguousRange {
     }
 
     parameter_meta {
-        ambiguous_file: "The ambiguous LOD ranges for each library design pair"
+        ambiguous: "The ambiguous LOD ranges for each library design pair"
         timeout: "The hours until the task is killed."
         memory: "The GB of memory provided to the task."
         threads: "The number of threads the task has access to."
@@ -118,16 +114,20 @@ task writeAmbiguousRange {
 
 task writeMetadata {
     input {
-        File metadata_file
+        Array[Map[String, String]] metadata
         Int timeout = 1
         Int memory = 1
         Int threads = 1
         String modules = "jq/1.6"
     }
 
+    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
+    Object dummy = object {dummy: metadata}
+    File out_metadata = write_json(dummy)
+
     command <<<
         set -euo pipefail
-        jq '.dummy' ~{metadata_file} > metadata.json
+        jq '.dummy' ~{out_metadata} > metadata.json
     >>>
 
     output {
@@ -135,7 +135,7 @@ task writeMetadata {
     }
 
     parameter_meta {
-        metadata_file: "Metadata to add to the CrosscheckFingerprints data"
+        metadata: "Metadata to add to the CrosscheckFingerprints data"
         timeout: "The hours until the task is killed."
         memory: "The GB of memory provided to the task."
         threads: "The number of threads the task has access to."
