@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
+## [0.3.0] - 2024-11-26
+
 ### Changed
 * Actually bumped default crosscheck_fingerprint_caller to v0.3.0. Never trust autosafe.
 
