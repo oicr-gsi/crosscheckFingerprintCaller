@@ -164,7 +164,7 @@ task runMain {
         Int timeout = 1
         Int memory = 1
         Int threads = 1
-        String modules = "crosscheck-fingerprint-caller/0.2.0"
+        String modules = "crosscheck-fingerprint-caller/0.3.0"
     }
 
     command <<<
