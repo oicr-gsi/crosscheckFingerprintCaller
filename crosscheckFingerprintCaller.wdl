@@ -3,15 +3,14 @@ version 1.0
 workflow crosscheckFingerprintCaller {
     input {
         # File and String options are required as WDL may run with Guanyin (no accession, so string) or Vidarr (accession, so internal file)
-        Array[File]? crosscheckFingerprintsFile
-        Array[String]? crosscheckFingerprintsPath
+        Array[String] crosscheckFingerprintsPath
         Array[Map[String, String]] metadata
         Array[Map[String, String]] ambiguous
         String outputFileNamePrefix
         String seperator = ";"
     }
 
-    Array[String] crosscheckFingerprints = select_first([crosscheckFingerprintsFile, crosscheckFingerprintsPath])
+    Array[String] crosscheckFingerprints = crosscheckFingerprintsPath
 
     parameter_meta {
         crosscheckFingerprintsFile: "CrosscheckFingerprints input files. If provided, will be used."
