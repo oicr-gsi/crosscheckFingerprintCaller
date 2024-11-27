@@ -13,7 +13,6 @@ workflow crosscheckFingerprintCaller {
     Array[String] crosscheckFingerprints = crosscheckFingerprintsPath
 
     parameter_meta {
-        crosscheckFingerprintsFile: "CrosscheckFingerprints input files. If provided, will be used."
         crosscheckFingerprintsPath: "CrosscheckFingerprints input file paths. Required if crosscheckFingerprintsFile not used."
         metadata: "Metadata to add to the CrosscheckFingerprints data"
         ambiguous: "The ambiguous LOD ranges for each library design pair"
