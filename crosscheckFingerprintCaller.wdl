@@ -2,15 +2,20 @@ version 1.0
 
 workflow crosscheckFingerprintCaller {
     input {
-        Array[File] crosscheckFingerprints
+        # File and String options are required as WDL may run with Guanyin (no accession, so string) or Vidarr (accession, so internal file)
+        Array[File]? crosscheckFingerprintsFile
+        Array[String]? crosscheckFingerprintsPath
         Array[Map[String, String]] metadata
         Array[Map[String, String]] ambiguous
         String outputFileNamePrefix
         String seperator = ";"
     }
 
+    Array[String] crosscheckFingerprints = select_first([crosscheckFingerprintsFile, crosscheckFingerprintsPath])
+
     parameter_meta {
-        crosscheckFingerprints: "CrosscheckFingerprints input files"
+        crosscheckFingerprintsFile: "CrosscheckFingerprints input files. If provided, will be used."
+        crosscheckFingerprintsPath: "CrosscheckFingerprints input file paths. Required if crosscheckFingerprintsFile not used."
         metadata: "Metadata to add to the CrosscheckFingerprints data"
         ambiguous: "The ambiguous LOD ranges for each library design pair"
         seperator: "Which character is used to seperate multiple batches"
@@ -156,7 +161,7 @@ task writeMetadata {
 
 task runMain {
     input {
-        Array[File] crosscheckFingerprints
+        Array[String] crosscheckFingerprints
         File metadata
         File ambiguous
         String seperator

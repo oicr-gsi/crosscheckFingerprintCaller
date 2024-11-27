@@ -22,7 +22,6 @@ java -jar cromwell.jar run crosscheckFingerprintCaller.wdl --inputs inputs.json
 #### Required workflow parameters:
 Parameter|Value|Description
 ---|---|---
-`crosscheckFingerprints`|Array[File]|CrosscheckFingerprints input files
 `metadata`|Array[Map[String,String]]|Metadata to add to the CrosscheckFingerprints data
 `ambiguous`|Array[Map[String,String]]|The ambiguous LOD ranges for each library design pair
 `outputFileNamePrefix`|String|String to add to the output file names
@@ -31,6 +30,8 @@ Parameter|Value|Description
 #### Optional workflow parameters:
 Parameter|Value|Default|Description
 ---|---|---|---
+`crosscheckFingerprintsFile`|Array[File]?|None|CrosscheckFingerprints input files. If provided, will be used.
+`crosscheckFingerprintsPath`|Array[String]?|None|CrosscheckFingerprints input file paths. Required if crosscheckFingerprintsFile not used.
 `seperator`|String|";"|Which character is used to seperate multiple batches
 
 
@@ -48,7 +49,7 @@ Parameter|Value|Default|Description
 `runMain.timeout`|Int|1|The hours until the task is killed.
 `runMain.memory`|Int|1|The GB of memory provided to the task.
 `runMain.threads`|Int|1|The number of threads the task has access to.
-`runMain.modules`|String|"crosscheck-fingerprint-caller/0.2.0"|The modules that will be loaded.
+`runMain.modules`|String|"crosscheck-fingerprint-caller/0.3.0"|The modules that will be loaded.
 
 
 ### Outputs
