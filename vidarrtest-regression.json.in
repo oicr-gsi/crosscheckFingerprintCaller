@@ -67,7 +67,18 @@
 					"lower": "-150"
 				}
 			],
-			"crosscheckFingerprintCaller.crosscheckFingerprintsFile": null,
+			"crosscheckFingerprintCaller.crosscheckFingerprintsFile": [{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data/OCTMOH4.39851.crosscheck_metrics.txt",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}],
 			"crosscheckFingerprintCaller.crosscheckFingerprintsPath": [
 				"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data/OCTMOH4.39851.crosscheck_metrics.txt"
 				], 
