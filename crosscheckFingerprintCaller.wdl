@@ -11,7 +11,7 @@ workflow crosscheckFingerprintCaller {
         String seperator = ";"
     }
 
-    Array[String] crosscheckFingerprints = select_first([crosscheckFingerprintsFile, crosscheckFingerprintsPath])
+    Array[String] crosscheckFingerprints = select_first([crosscheckFingerprintsPath, crosscheckFingerprintsFile])
 
     parameter_meta {
         crosscheckFingerprintsFile: "CrosscheckFingerprints input files. If provided, will be used."
