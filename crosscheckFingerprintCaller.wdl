@@ -3,7 +3,7 @@ version 1.0
 workflow crosscheckFingerprintCaller {
     input {
         Array[File] crosscheckFingerprints
-        Array[Map[String, String]] metadata
+        File metadata
         Array[Map[String, String]] ambiguous
         String outputFileNamePrefix
         String seperator = ";"
@@ -22,15 +22,10 @@ workflow crosscheckFingerprintCaller {
             ambiguous = ambiguous
     }
 
-    call writeMetadata {
-        input:
-            metadata = metadata
-    }
-
     call runMain {
         input:
             crosscheckFingerprints = crosscheckFingerprints,
-            metadata = writeMetadata.out,
+            metadata = metadata,
             ambiguous = writeAmbiguousRange.out,
             seperator = seperator,
             outputFileNamePrefix = outputFileNamePrefix,
@@ -100,49 +95,6 @@ task writeAmbiguousRange {
     meta {
         out_metadata: {
             out: "A file that's storing the ambiguous JSON string"
-        }
-    }
-
-    runtime {
-        modules: "~{modules}"
-        memory:  "~{memory} GB"
-        cpu:     "~{threads}"
-        timeout: "~{timeout}"
-    }
-}
-
-task writeMetadata {
-    input {
-        Array[Map[String, String]] metadata
-        Int timeout = 1
-        Int memory = 1
-        Int threads = 1
-        String modules = "jq/1.6"
-    }
-
-    # Necessary as Cromwell 44 has bug that prevents Array being used in write_json. Fixed in Cromwell 54
-    File out_metadata = write_json(object {dummy: metadata})
-
-    command <<<
-        set -euo pipefail
-        jq '.dummy' ~{out_metadata} > metadata.json
-    >>>
-
-    output {
-        File out = "metadata.json"
-    }
-
-    parameter_meta {
-        metadata: "Metadata to add to the CrosscheckFingerprints data"
-        timeout: "The hours until the task is killed."
-        memory: "The GB of memory provided to the task."
-        threads: "The number of threads the task has access to."
-        modules: "The modules that will be loaded."
-    }
-
-    meta {
-        out_metadata: {
-            out: "A file that's storing the metadata JSON string"
         }
     }
 

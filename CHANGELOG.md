@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
+### Changed
+* Metadata will be supplied as a json file, rather than as a `Dict` parameter, 
+as metadata is now kept as a workflow file, rather than vidarr database entry. 
 
 ## [1.0.0] - 2025-04-16
 * v1 release with crosscheck_fingerprint_caller v1.0.0
