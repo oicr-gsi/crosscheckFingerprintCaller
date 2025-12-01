@@ -1,0 +1,3 @@
+[submodule "crosscheckFingerprints"]
+	path = crosscheckFingerprints
+	url = git@github.com:oicr-gsi/crosscheckFingerprints.git
