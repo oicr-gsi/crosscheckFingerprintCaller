@@ -1,8 +1,19 @@
 version 1.0
 
+import "imports/pull_crosscheckFingerprints.wdl" as crosscheckFingerprints
+
 workflow crosscheckFingerprintCaller {
     input {
-        Array[File] crosscheckFingerprints
+        # crosscheckFingerprint inputs
+        Array[File] inputs
+        Array[String]? compareAgainst
+        String? cachedFilePath
+        String haplotypeMapFileName
+        String haplotypeMapDir = "$CROSSCHECKFINGERPRINTS_HAPLOTYPE_MAP_ROOT"
+        String crosscheckBy = "SAMPLE"
+        Boolean calculateTumorAwareResults = false
+
+        # crosscheckFingerprintCaller inputs
         Array[Map[String, String]] metadata
         Array[Map[String, String]] ambiguous
         String outputFileNamePrefix
@@ -10,11 +21,30 @@ workflow crosscheckFingerprintCaller {
     }
 
     parameter_meta {
-        crosscheckFingerprints: "CrosscheckFingerprints input files"
+        inputs: "A list of SAM/BAM/VCF files to fingerprint."
+        cachedFilePath: "Previous output of this workflow. If given, only new comparisons will be calculated."
+        compareAgainst: "If defined, inputs are compared against these files. Ignored if cachedFilePath is defined."
+        haplotypeMapFileName: "The file name that lists a set of SNPs, optionally arranged in high-LD blocks, to be used for fingerprinting."
+        haplotypeMapDir: "The directory that contains haplotype map files. By default the modulator data directory."
+        crosscheckBy: "Specificies which data-type should be used as the basic comparison unit. Fingerprints from readgroups can be rolled-up to the LIBRARY, SAMPLE, or FILE level before being compared. Fingerprints from VCF can be be compared by SAMPLE or FILE."
+        calculateTumorAwareResults: "Specifies whether the Tumor-aware result should be calculated. These are time consuming and can roughly double the runtime of the tool. When crosschecking many groups not calculating the tumor-aware results can result in a significant speedup."
+
         metadata: "Metadata to add to the CrosscheckFingerprints data"
         ambiguous: "The ambiguous LOD ranges for each library design pair"
         seperator: "Which character is used to seperate multiple batches"
         outputFileNamePrefix: "String to add to the output file names"
+    }
+
+    call crosscheckFingerprints.crosscheckFingerprints {
+        input:
+            inputs = inputs,
+            compareAgainst = compareAgainst,
+            cachedFilePath = cachedFilePath,
+            haplotypeMapFileName = haplotypeMapFileName,
+            haplotypeMapDir = haplotypeMapDir,
+            crosscheckBy = crosscheckBy,
+            calculateTumorAwareResults = calculateTumorAwareResults,
+            outputPrefix = outputFileNamePrefix
     }
 
     call writeAmbiguousRange {
@@ -29,7 +59,7 @@ workflow crosscheckFingerprintCaller {
 
     call runMain {
         input:
-            crosscheckFingerprints = crosscheckFingerprints,
+            crosscheckFingerprints = [crosscheckFingerprints.crosscheckMetrics],
             metadata = writeMetadata.out,
             ambiguous = writeAmbiguousRange.out,
             seperator = seperator,
