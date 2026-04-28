@@ -6,7 +6,7 @@ workflow crosscheckFingerprintCaller {
     input {
         # crosscheckFingerprint inputs
         Array[File] inputs
-        Array[String]? compareAgainst
+        Array[File]? compareAgainst
         String? cachedFilePath
         String haplotypeMapFileName
         String haplotypeMapDir = "$CROSSCHECKFINGERPRINTS_HAPLOTYPE_MAP_ROOT"

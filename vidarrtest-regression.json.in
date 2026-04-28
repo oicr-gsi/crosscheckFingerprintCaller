@@ -43,7 +43,18 @@
 			],
 			"crosscheckFingerprintCaller.cachedFilePath": null,
 			"crosscheckFingerprintCaller.calculateTumorAwareResults": null,
-			"crosscheckFingerprintCaller.compareAgainst": ["/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test01.vcf.gz"],
+			"crosscheckFingerprintCaller.compareAgainst": [{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test01.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}],
 			"crosscheckFingerprintCaller.crosscheckBy": null,
 			"crosscheckFingerprintCaller.crosscheckFingerprints.compareAgainstFile_jobMemory": null,
 			"crosscheckFingerprintCaller.crosscheckFingerprints.compareAgainstFile_threads": null,
@@ -175,11 +186,42 @@
 			],
 			"crosscheckFingerprintCaller.cachedFilePath": null,
 			"crosscheckFingerprintCaller.calculateTumorAwareResults": null,
-			"crosscheckFingerprintCaller.compareAgainst": [
-				"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test01.vcf.gz",
-				"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test02.vcf.gz",
-        		"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/NEOS_Test.vcf.gz"
-			],
+			"crosscheckFingerprintCaller.compareAgainst": [{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test01.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}, 
+			{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test02.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}, 
+			{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/NEOS_Test.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}],
 			"crosscheckFingerprintCaller.crosscheckBy": null,
 			"crosscheckFingerprintCaller.crosscheckFingerprints.compareAgainstFile_jobMemory": null,
 			"crosscheckFingerprintCaller.crosscheckFingerprints.compareAgainstFile_threads": null,
@@ -341,11 +383,42 @@
 			],
 			"crosscheckFingerprintCaller.cachedFilePath": null,
 			"crosscheckFingerprintCaller.calculateTumorAwareResults": null,
-			"crosscheckFingerprintCaller.compareAgainst": [
-				"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test01.vcf.gz",
-				"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test02.vcf.gz",
-        		"/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/NEOS_Test.vcf.gz"
-			],
+			"crosscheckFingerprintCaller.compareAgainst": [{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test01.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}, 
+			{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/OLALA_Test02.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}, 
+			{
+				"contents": {
+					"configuration": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/input_data_v2/NEOS_Test.vcf.gz",
+					"externalIds": [
+						{
+							"id": "TEST",
+							"provider": "TEST"
+						}
+					]
+				},
+				"type": "EXTERNAL"
+			}],
 			"crosscheckFingerprintCaller.crosscheckBy": null,
 			"crosscheckFingerprintCaller.crosscheckFingerprints.compareAgainstFile_jobMemory": null,
 			"crosscheckFingerprintCaller.crosscheckFingerprints.compareAgainstFile_threads": null,
