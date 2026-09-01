@@ -155,7 +155,8 @@ task writeMetadata {
 
     command <<<
         set -euo pipefail
-        jq '.dummy' ~{out_metadata} > metadata.json
+        # -S sorts the keys. different ordering created issue in different environment, see ticket: GP-5853 
+        jq -S '.dummy' ~{out_metadata} > metadata.json
     >>>
 
     output {
