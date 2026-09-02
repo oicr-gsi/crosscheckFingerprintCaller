@@ -10,7 +10,7 @@
 			{
 				"metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
 				"metrics_compare": "@CHECKOUT@/tests/compare.sh",
-				"output_metrics": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/expected_output_v2/single_input.calculate.output",
+				"output_metrics": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/3.0.1/output_metrics/single_input.output",
 				"type": "script"
 			}
 		],
@@ -153,7 +153,7 @@
 			{
 				"metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
 				"metrics_compare": "@CHECKOUT@/tests/compare.sh",
-				"output_metrics": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/expected_output_v2/no_swap.calculate.output",
+				"output_metrics": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/3.0.1/output_metrics/no_swap.output",
 				"type": "script"
 			}
 		],
@@ -350,7 +350,7 @@
 			{
 				"metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
 				"metrics_compare": "@CHECKOUT@/tests/compare.sh",
-				"output_metrics": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/expected_output_v2/swap.calculate.output",
+				"output_metrics": "/.mounts/labs/gsi/testdata/crosscheckFingerprintCaller/3.0.1/output_metrics/swap.output",
 				"type": "script"
 			}
 		],
