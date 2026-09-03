@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
-## [Unreleased]
+## [3.0.1] -2026-09-03
+
+### Changed
+* Sort metadata output keys. different ordering created issue in different environment, see ticket: GP-5853 
 
 ## [3.0.0] - 2026-05-28
 
