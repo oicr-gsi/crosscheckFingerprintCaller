@@ -4,15 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
-## [Unreleased]
+## [3.0.1] -2026-09-03
 
-### Fixed
-* The CSV column order no longer depends on the workflow engine. `metadata` is a WDL `Map`,
-  which has no defined ordering, so `write_json` emitted its keys in whatever order the engine
-  iterated the map; that order reached the output columns unchanged, because the caller builds
-  its DataFrame with `from_records` and takes the keys as it first meets them. A Cromwell
-  upgrade was enough to reorder every column. `writeMetadata` now sorts the keys, so the
-  columns are alphabetical and stable. Existing baselines must be regenerated once.
+### Changed
+* Sort metadata output keys. different ordering created issue in different environment, see ticket: GP-5853 
 
 ## [3.0.0] - 2026-05-28
 
